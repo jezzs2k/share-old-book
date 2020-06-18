@@ -1,11 +1,24 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Drawer, Button, Row, Col, Avatar, Tooltip } from 'antd';
 import { MenuFoldOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 import './Navbar.css';
 
+import AuthContext from '../../context/Auth/authContext';
+
 const Navbar = () => {
+  const authContext = useContext(AuthContext);
+
+  const { isAuthenticated, loadUser, user, logout } = authContext;
+
+  useEffect(() => {
+    if (isAuthenticated || localStorage.token) {
+      loadUser();
+    }
+    // eslint-disable-next-line
+  }, [isAuthenticated]);
+
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
@@ -13,6 +26,10 @@ const Navbar = () => {
 
   const onClose = () => {
     setVisible(false);
+  };
+
+  const handleLogout = () => {
+    logout();
   };
   return (
     <div>
@@ -34,7 +51,11 @@ const Navbar = () => {
           <Col xs={4} sm={4} md={6} lg={8} xl={10}>
             <Tooltip placement='bottom' title='your account'>
               <Avatar
-                src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+                src={
+                  user
+                    ? user.avatar
+                    : 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+                }
                 className='avatar-user'
               />
             </Tooltip>
@@ -66,7 +87,7 @@ const Navbar = () => {
             More ...
           </Link>
         </div>
-        {true && (
+        {isAuthenticated && (
           <div className='book-of-user'>
             <h3 className='title-item'>Your book</h3>
             <Link to='#/' className='ebook-item'>
@@ -87,12 +108,17 @@ const Navbar = () => {
           </div>
         )}
         <div className='action'>
-          <Button type='primary'>
-            <PlusCircleOutlined />
-            Create new book
-          </Button>
-          {true ? (
-            <p className='logout'>Logout</p>
+          <Link to='/create/book'>
+            <Button type='primary'>
+              <PlusCircleOutlined />
+              Create new book
+            </Button>
+          </Link>
+
+          {isAuthenticated ? (
+            <p className='logout' onClick={handleLogout}>
+              Logout
+            </p>
           ) : (
             <div>
               <Link className='login-link' to='/login'>

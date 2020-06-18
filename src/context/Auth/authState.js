@@ -101,7 +101,7 @@ const AuthState = (props) => {
       const result = await db
         .collection('users')
         .doc(id)
-        .set({ ...data, id });
+        .set({ ...data, id, timeStamps: new Date().getTime() });
       console.log('A new user has been added', result);
 
       loadUser();

@@ -1,0 +1,19 @@
+.select-category {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.choose-free-book {
+  margin-left: 10px !important;
+}
+
+.text {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.center {
+  margin-top: 50px;
+}
