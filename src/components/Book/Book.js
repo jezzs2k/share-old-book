@@ -51,7 +51,7 @@ const Books = () => {
     if (e) {
       loadBookByCondition('free');
     } else {
-      loadBooks();
+      localStorage.token ? loadBooks() : loadBookByCondition('free');
     }
   };
   if (loading) {
@@ -60,19 +60,21 @@ const Books = () => {
 
   return (
     <div className='books'>
-      <div className='select-category'>
-        <Select
-          style={{ maxWidth: 500, width: '100%' }}
-          value={categoryChange}
-          onChange={onChange}>
-          {categoryBooks.map((category) => (
-            <Option key={category}>{category}</Option>
-          ))}
-        </Select>
+      {isAuthenticated && (
+        <div className='select-category'>
+          <Select
+            style={{ maxWidth: 500, width: '100%' }}
+            value={categoryChange}
+            onChange={onChange}>
+            {categoryBooks.map((category) => (
+              <Option key={category}>{category}</Option>
+            ))}
+          </Select>
 
-        <Switch onChange={handlePayment} className='choose-free-book' />
-        <span className='text'>{!isFree ? 'Free' : 'All'}</span>
-      </div>
+          <Switch onChange={handlePayment} className='choose-free-book' />
+          <span className='text'>{!isFree ? 'Free' : 'All'}</span>
+        </div>
+      )}
       <div className='center'>
         <Row justify='space-around'>
           {books && books.map((book) => <BookItem book={book} />)}
