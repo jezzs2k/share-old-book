@@ -108,17 +108,18 @@ const Navbar = () => {
           </div>
         )}
         <div className='action'>
-          <Link to='/create/book'>
-            <Button type='primary'>
-              <PlusCircleOutlined />
-              Create new book
-            </Button>
-          </Link>
-
           {isAuthenticated ? (
-            <p className='logout' onClick={handleLogout}>
-              Logout
-            </p>
+            <div>
+              <Link to='/create/book'>
+                <Button type='primary'>
+                  <PlusCircleOutlined />
+                  Create new book
+                </Button>
+              </Link>
+              <p className='logout' onClick={handleLogout}>
+                Logout
+              </p>
+            </div>
           ) : (
             <div>
               <Link className='login-link' to='/login'>
