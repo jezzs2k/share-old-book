@@ -1,0 +1,71 @@
+.menu-icon {
+  font-size: 1.2rem;
+}
+
+.top {
+  max-width: 90%;
+  margin: auto;
+}
+
+.top .avatar-user {
+  float: right;
+}
+
+.top .title {
+  text-align: center;
+}
+
+.top .red {
+  color: rgba(238, 109, 49, 0.829);
+}
+
+.top .yellow {
+  color: rgb(168, 233, 39);
+}
+
+.top .orange {
+  color: rgb(247, 199, 44);
+}
+
+.top .purple {
+  color: rgb(209, 7, 158);
+}
+
+.ebook-free .ebook-item,
+.book-of-user .ebook-item {
+  width: 100%;
+  display: block;
+  color: #707070;
+  transition: 0.3s ease-in-out;
+}
+
+.ebook-free .ebook-item:hover,
+.book-of-user .ebook-item:hover {
+  text-decoration: underline;
+  color: rgb(47, 120, 255);
+}
+
+.ebook-free .title-item,
+.book-of-user .title-item {
+  width: 100%;
+}
+
+.action {
+  margin-top: 40px;
+}
+
+.action .login-link,
+.action .logout {
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.action .logout:hover {
+  text-decoration: underline;
+}
+
+.action .login-link,
+.action .register-link {
+  width: 100%;
+  display: block;
+}
